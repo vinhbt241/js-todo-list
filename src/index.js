@@ -1,5 +1,8 @@
 import { Task } from "./task";
 import { Project } from "./project";
+import { DOMController } from "./DOMController";
+
+const contentContainer = document.querySelector('#content');
 
 const projectOne = Project("Test Project");
 
@@ -11,7 +14,8 @@ projectOne.addTask(taskOne);
 projectOne.addTask(taskTwo);
 projectOne.addTask(taskThree);
 
-console.log(projectOne);
-console.log(projectOne.tasks);
+contentContainer.append(DOMController.renderProjectList([projectOne]));
+contentContainer.append(DOMController.renderTaskList(projectOne));
+
 
 
