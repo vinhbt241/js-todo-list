@@ -1,6 +1,7 @@
 import { Task } from "./task";
 import { Project } from "./project";
 import { DOMController } from "./DOMController";
+import { App } from "./app";
 
 const contentContainer = document.querySelector('#content');
 
@@ -14,8 +15,16 @@ projectOne.addTask(taskOne);
 projectOne.addTask(taskTwo);
 projectOne.addTask(taskThree);
 
-contentContainer.append(DOMController.renderProjectList([projectOne]));
-contentContainer.append(DOMController.renderTaskList(projectOne));
+App.addProject(projectOne);
+
+const projectTwo = Project("Hehe");
+
+App.addProject(projectTwo);
+
+contentContainer.appendChild(DOMController.renderProjectList(App.projects));
+contentContainer.appendChild(DOMController.renderTaskList(App.projects[0].tasks))
+
+
 
 
 
