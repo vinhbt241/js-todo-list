@@ -1,5 +1,5 @@
 const Project = (name) => {
-  const ID = Math.floor(Math.random() * Date.now());
+  const ID = (Math.floor(Math.random() * Date.now())).toString();
   const tasks = [];
 
   const addTask = (task) => {
