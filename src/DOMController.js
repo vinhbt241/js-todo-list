@@ -18,10 +18,10 @@ const RenderController = () => {
     return projectList;
   }
 
-  const renderTaskList = (tasks) => {
+  const renderTaskList = (project) => {
     const taskList = document.createElement('div');
 
-    tasks.forEach(task => {
+    project.tasks.forEach(task => {
       const taskItem = document.createElement('button');
       taskItem.id = task.ID;
 
@@ -49,16 +49,12 @@ const RenderController = () => {
       deleteBtn.innerText = "Delete";
       deleteBtn.onclick = (e) => {
         const taskID = e.target.parentElement.id;
-        // currentProject.tasks.removeTask(taskID)
+        project.removeTask(taskID);
       }
       taskItem.appendChild(deleteBtn);
   
       taskList.appendChild(taskItem);
     })
-
-    const currentProject = () => {
-      
-    }
 
     return taskList
   }

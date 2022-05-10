@@ -1,6 +1,6 @@
 const Project = (name) => {
   const ID = (Math.floor(Math.random() * Date.now())).toString();
-  const tasks = [];
+  let tasks = [];
 
   const addTask = (task) => {
     tasks.push(task);
@@ -17,7 +17,8 @@ const Project = (name) => {
   }
 
   const removeTask = (taskID) => {
-    tasks = tasks.filter(task => { task.ID != taskID });
+    tasks = tasks.filter(task => { return task.ID != taskID });
+    console.log(tasks);
     return;
   }
 

@@ -22,7 +22,7 @@ const projectTwo = Project("Hehe");
 App.addProject(projectTwo);
 
 contentContainer.appendChild(DOMController.renderProjectList(App.projects));
-contentContainer.appendChild(DOMController.renderTaskList(App.projects[0].tasks))
+contentContainer.appendChild(DOMController.renderTaskList(App.projects[0]))
 
 
 
