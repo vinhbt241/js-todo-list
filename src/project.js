@@ -3,26 +3,27 @@ const Project = (name) => {
   let tasks = [];
 
   const addTask = (task) => {
-    tasks.push(task);
+    thisProject.tasks.push(task);
     return;
   }
 
   const editTask = (taskID, editedTask) => {
-    tasks.forEach((task, index) => {
+    thisProject.tasks.forEach((task, index) => {
       if(task.ID == taskID){
-        tasks[index] = editedTask;
+        thisProject.tasks[index] = editedTask;
         return;
       }
     })
   }
 
   const removeTask = (taskID) => {
-    tasks = tasks.filter(task => { return task.ID != taskID });
-    console.log(tasks);
+    thisProject.tasks = thisProject.tasks.filter(task => { return task.ID != taskID });
     return;
   }
 
-  return { ID, name, tasks, addTask, editTask, removeTask };
+  const thisProject = { ID, name, tasks, addTask, editTask, removeTask }
+
+  return thisProject;
 }
 
 export { Project }

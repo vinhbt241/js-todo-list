@@ -50,6 +50,8 @@ const RenderController = () => {
       deleteBtn.onclick = (e) => {
         const taskID = e.target.parentElement.id;
         project.removeTask(taskID);
+        taskList.innerHTML = ""
+        taskList.appendChild(renderTaskList(project));
       }
       taskItem.appendChild(deleteBtn);
   
