@@ -1,16 +1,25 @@
 const App = (() => {
   const projects = [];
 
-  const addProject = (project) => {
-    projects.push(project);
+  const addProject = function(project) {
+    this.projects.push(project);
     return;
   }
 
-  const removeProject = (projectID) => {
-    projects = projects.filter(project => { project.ID != projectID })
+  const editProject = function(projectID, newName) {
+    this.projects.forEach((project, index) => {
+      if(project.ID == projectID) {
+        this.projects[index].name = newName;
+        return;
+      }
+    })
   }
 
-  return { projects, addProject, removeProject }
+  const removeProject = function(projectID) {
+   this.projects = this.projects.filter(project => { project.ID != projectID })
+  }
+
+  return { projects, addProject, editProject, removeProject }
 })();
 
 export { App }
