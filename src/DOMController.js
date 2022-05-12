@@ -43,7 +43,15 @@ const RenderController = () => {
       taskItem.appendChild(taskDueDate);
 
       const completeBtn = document.createElement('button');
-      completeBtn.innerText = "Complete"
+      if(task.isComplete) {
+        completeBtn.innerText = "O";
+      } else {
+        completeBtn.innerText = "X";
+      }
+      completeBtn.onclick = () => {
+        task.isComplete = !task.isComplete;
+        taskList.parentNode.replaceChild(renderTaskList(project), taskList);
+      }
       taskItem.appendChild(completeBtn);
 
       const editBtn = document.createElement('button');
@@ -52,11 +60,9 @@ const RenderController = () => {
       
       const deleteBtn = document.createElement('button');
       deleteBtn.innerText = "Delete";
-      deleteBtn.onclick = (e) => {
-        const taskID = e.target.parentElement.id;
-        project.removeTask(taskID);
-        taskList.innerHTML = ""
-        taskList.appendChild(renderTaskList(project));
+      deleteBtn.onclick = () => {
+        project.removeTask(task.ID);
+        taskList.parentNode.replaceChild(renderTaskList(project), taskList);
       }
       taskItem.appendChild(deleteBtn);
   
@@ -81,8 +87,7 @@ const RenderController = () => {
     App.projects.forEach((project) => {
       if(project.ID == displayProjectID) {
         project.addTask(newTask);
-        taskList.innerHTML = ""
-        taskList.appendChild(renderTaskList(project));
+        taskList.parentNode.replaceChild(renderTaskList(project), taskList);
         return;
       }
     })
