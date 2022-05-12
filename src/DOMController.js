@@ -9,7 +9,11 @@ const RenderController = () => {
   
     projects.forEach(project => {
       const projectItem = document.createElement('button');
-      projectItem.id = project.ID;
+      projectItem.onclick = () => {
+        const taskList = document.querySelector(".task-list");
+        taskList.parentNode.replaceChild(renderTaskList(project), taskList);
+        return;
+      }
 
       const projectName = document.createElement('h2');
       projectName.innerText = project.name;
