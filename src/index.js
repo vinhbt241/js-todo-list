@@ -5,21 +5,20 @@ import { App } from "./app";
 
 const contentContainer = document.querySelector('#content');
 
-const projectOne = Project("Test Project");
+const guideProject = Project("Welcome!");
 
-const taskOne = Task("Task 1", "Haha info", new Date(2022, 5, 9));
-const taskTwo = Task("Task 2", "Hihi info", new Date(2022, 5, 7));
-const taskThree = Task("Task 3", "Hoho info", new Date(2022, 5, 5));
+const taskOne = Task("Mark complete task", "You can tick to the little rectange box on the left of the task's box to mark comlete", Date.now());
+const taskTwo = Task("Edit", "To edit task, click to screw symbol on the lower right corner", Date.now());
+const taskThree = Task("Delete", "You can delete task by simply click on the red X symbol at top left corner", Date.now());
+const taskFour = Task("Add new task", "Click to plus symbol on the bottom of the screen to add task", Date.now());
 
-projectOne.addTask(taskOne);
-projectOne.addTask(taskTwo);
-projectOne.addTask(taskThree);
 
-App.addProject(projectOne);
+guideProject.addTask(taskOne);
+guideProject.addTask(taskTwo);
+guideProject.addTask(taskThree);
+guideProject.addTask(taskFour);
 
-const projectTwo = Project("Hehe");
-
-App.addProject(projectTwo);
+App.addProject(guideProject);
 
 contentContainer.appendChild(DOMController.renderProjectList(App.projects));
 contentContainer.appendChild(DOMController.renderTaskList(App.projects[0]));

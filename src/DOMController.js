@@ -6,6 +6,7 @@ const RenderController = () => {
 
   const renderProjectList = (projects) => {
     const projectList = document.createElement('div');
+    projectList.classList.add("project-list")
   
     projects.forEach(project => {
       const projectItem = document.createElement('button');
@@ -21,7 +22,11 @@ const RenderController = () => {
   
       projectList.appendChild(projectItem);
     })
-  
+    
+    const addProjectBtn = document.createElement('button');
+    addProjectBtn.innerHTML = "<h2>Add new project</h2>";
+    projectList.appendChild(addProjectBtn);
+
     return projectList;
   }
 
@@ -45,6 +50,8 @@ const RenderController = () => {
       const taskDueDate = document.createElement('p');
       taskDueDate.innerText = format(task.dueDate, 'yyyy-MM-dd');
       taskItem.appendChild(taskDueDate);
+      
+      
 
       const completeBtn = document.createElement('button');
       if(task.isComplete) {
@@ -60,6 +67,34 @@ const RenderController = () => {
 
       const editBtn = document.createElement('button');
       editBtn.innerText = "Edit";
+      editBtn.onclick = () => {
+        const editTaskForm = document.getElementById("edit-task");
+        editTaskForm['edit-task-name'].value = task.name;
+        editTaskForm['edit-task-info'].value = task.info;
+        editTaskForm['edit-task-due-date'].value = format(task.dueDate, 'yyyy-MM-dd');
+        editTaskForm['edit-task-id'].value = task.ID;
+        editTaskForm.addEventListener('submit',e => {
+          e.preventDefault();
+          let name = editTaskForm['edit-task-name'].value;
+          let info = editTaskForm['edit-task-info'].value;
+          let dueDate = Date.parse(editTaskForm['edit-task-due-date'].value);
+          let taskID = editTaskForm['edit-task-id'].value;
+          const editedTask = Task(name, info, dueDate);
+
+          const taskList = document.querySelector(".task-list");
+          let displayProjectID = taskList.getAttribute('projectid');
+
+          App.projects.forEach((project) => {
+            if(project.ID == displayProjectID) {
+              project.editTask(taskID, editedTask);
+              taskList.parentNode.replaceChild(renderTaskList(project), taskList);
+              return;
+            }
+          })
+          return;
+        })
+        return;
+      }
       taskItem.appendChild(editBtn);
       
       const deleteBtn = document.createElement('button');
@@ -82,7 +117,10 @@ const RenderController = () => {
     // Create new task
     let name = newTaskForm['new-task-name'].value;
     let info = newTaskForm['new-task-info'].value;
-    let dueDate = Date.parse(newTaskForm['new-task-due-date'].value);
+    let dueDate = Date.now();
+    if(newTaskForm['new-task-due-date'].value != "") {
+      dueDate = Date.parse(newTaskForm['new-task-due-date'].value);
+    }
     const newTask = Task(name, info, dueDate);
     // Find current project id
     const taskList = document.querySelector(".task-list");
