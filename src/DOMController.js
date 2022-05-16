@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { Task } from "./task";
 import { App } from "./app";
+import { Project } from "./project";
 
 const RenderController = () => {
 
@@ -135,6 +136,47 @@ const RenderController = () => {
     })
     return;
   })
+
+  const newProjectForm = document.getElementById("new-project");
+  newProjectForm.addEventListener('submit', e => {
+    e.preventDefault();
+    let name = newProjectForm['new-project-name'].value;
+    const newProject = Project(name);
+
+    App.addProject(newProject);
+    const projectList = document.querySelector(".project-list");
+    projectList.parentNode.replaceChild(renderProjectList(App.projects), projectList);
+    return;
+  })
+
+  const changeProjectNameBtn = document.getElementById("change-project-name");
+  changeProjectNameBtn.onclick = () => {
+    const taskList = document.querySelector(".task-list");
+    let displayProjectID = taskList.getAttribute('projectid');
+
+    const oldEditProjectForm = document.getElementById("edit-project");
+    const editProjectForm = oldEditProjectForm.cloneNode(true);
+    oldEditProjectForm.parentNode.replaceChild(editProjectForm, oldEditProjectForm);
+    
+    const currentProject = App.projects.find(project => {
+      return project.ID == displayProjectID;
+    })
+
+    editProjectForm['edit-project-name'].value = currentProject.name;
+
+    editProjectForm.addEventListener('submit', e => {
+      e.preventDefault();
+      let newName = editProjectForm['edit-project-name'].value;
+
+      App.editProject(displayProjectID, newName);
+
+      const projectList = document.querySelector(".project-list");
+      projectList.parentNode.replaceChild(renderProjectList(App.projects), projectList);
+      return;
+    })
+
+    return;
+  } 
   
   return { renderProjectList, renderTaskList }
 }

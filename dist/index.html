@@ -11,8 +11,11 @@
   <div id="content">
   </div>
 
+  <button id="change-project-name">Change project's name</button>
+  <button id="delete-project">Delete project</button>
+
   <form id="new-task">
-    New form
+    New task
     <input type="text" placeholder="Add new task" id="new-task-name">
     <input type="date" id="new-task-due-date">
     <textarea placeholder="Add more information about task" id="new-task-info"></textarea>
@@ -20,11 +23,23 @@
   </form>
 
   <form id="edit-task">
-    Edit form
+    Edit task
     <input type="text" id="edit-task-name">
     <input type="date" id="edit-task-due-date">
     <textarea id="edit-task-info"></textarea>
     <input type="hidden" id="edit-task-id" name="taskID" value="">
+    <button type="submit">Save</button>
+  </form>
+
+  <form id="new-project">
+    New Project 
+    <input type="text" id="new-project-name" placeholder="Add new project">
+    <button type="submit">Save</button>
+  </form>
+
+  <form id="edit-project">
+    Edit Project
+    <input type="text" id="edit-project-name">
     <button type="submit">Save</button>
   </form>
 </body>
