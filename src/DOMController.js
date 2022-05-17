@@ -17,17 +17,10 @@ const RenderController = () => {
         return;
       }
 
-      const projectName = document.createElement('h2');
-      projectName.innerText = project.name;
-      projectItem.appendChild(projectName);
+      projectItem.innerText = project.name;
   
       projectList.appendChild(projectItem);
     })
-    
-    const addProjectBtn = document.createElement('button');
-    addProjectBtn.innerHTML = "<h2>Add new project</h2>";
-    projectList.appendChild(addProjectBtn);
-
     return projectList;
   }
 
@@ -140,6 +133,7 @@ const RenderController = () => {
   const newProjectForm = document.getElementById("new-project");
   newProjectForm.addEventListener('submit', e => {
     e.preventDefault();
+    newProjectForm.classList.remove('show');
     let name = newProjectForm['new-project-name'].value;
     const newProject = Project(name);
 
@@ -148,6 +142,11 @@ const RenderController = () => {
     projectList.parentNode.replaceChild(renderProjectList(App.projects), projectList);
     return;
   })
+
+  const addNewProjectBtn = document.getElementById("add-project")
+  addNewProjectBtn.onclick = () => {
+    newProjectForm.classList.add("show");
+  }
 
   const changeProjectNameBtn = document.getElementById("change-project-name");
   changeProjectNameBtn.onclick = () => {
@@ -164,8 +163,11 @@ const RenderController = () => {
 
     editProjectForm['edit-project-name'].value = currentProject.name;
 
+    editProjectForm.classList.add("show");
+
     editProjectForm.addEventListener('submit', e => {
       e.preventDefault();
+      editProjectForm.classList.remove("show");
       let newName = editProjectForm['edit-project-name'].value;
 
       App.editProject(displayProjectID, newName);
@@ -177,7 +179,7 @@ const RenderController = () => {
 
     return;
   } 
-  
+
   return { renderProjectList, renderTaskList }
 }
 

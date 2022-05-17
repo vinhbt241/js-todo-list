@@ -2,6 +2,7 @@ import { Task } from "./task";
 import { Project } from "./project";
 import { DOMController } from "./DOMController";
 import { App } from "./app";
+import './style.css';
 
 const contentContainer = document.querySelector('#content');
 

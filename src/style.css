@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+form {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  gap: 10px;
+}
+
+form.show {
+  display: flex;
+}
+
+form input {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 1px solid black;
+}
+
+form button {
+  font-size: 1.5rem;
+  padding: 5px 40px;
+  border-radius: 15px;
+}
+
+#content {
+  width: 100vw;
+  height: 100vh;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-list {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid black;
+}
+
+.project-list button {
+  padding: 10px 20px;
+  border: 0;
+  background-color: inherit;
+  color: inherit;
+  font-size: 24px;
+}
+
+.project-list button:hover, .project-menu button:hover, form button:hover {
+  background-color:#e6f5ff;
+  color: #008ae6;
+}
+
+.project-menu {
+  position: fixed;
+  bottom: 0%;
+  width: 100vw;
+  background-color: #fff;
+
+  border-top: 1px solid black;
+  display: flex;
+  justify-content: center;
+}
+
+.project-menu button {
+  padding: 20px;
+  font-size: 18px;
+  border: none;
+}
+
+.task-list {
+  width: 80vw;
+  height: 100%;
+  margin-bottom: 7vh;
+  overflow: auto;
+  padding: 0 10px;
+}
