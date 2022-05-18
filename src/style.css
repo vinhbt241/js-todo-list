@@ -10,7 +10,8 @@ form {
   left: 0;
   right: 0;
 
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -23,8 +24,9 @@ form.show {
   display: flex;
 }
 
-form input {
+form input, textarea {
   padding: 10px 20px;
+  width: 30vw;
   border-radius: 10px;
   font-size: 1.5rem;
   text-align: center;
@@ -44,6 +46,8 @@ form button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 10px 20vh 10px;
+  box-sizing: border-box;
 }
 
 .project-list {
@@ -73,6 +77,7 @@ form button {
   bottom: 0%;
   width: 100vw;
   background-color: #fff;
+  max-height: 20vh;
 
   border-top: 1px solid black;
   display: flex;
@@ -87,8 +92,5 @@ form button {
 
 .task-list {
   width: 80vw;
-  height: 100%;
-  margin-bottom: 7vh;
   overflow: auto;
-  padding: 0 10px;
 }

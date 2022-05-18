@@ -108,6 +108,7 @@ const RenderController = () => {
   const newTaskForm = document.getElementById("new-task");
   newTaskForm.addEventListener('submit', e => {
     e.preventDefault();
+    newTaskForm.classList.remove("show")
     // Create new task
     let name = newTaskForm['new-task-name'].value;
     let info = newTaskForm['new-task-info'].value;
@@ -179,6 +180,11 @@ const RenderController = () => {
 
     return;
   } 
+
+  const addTaskBtn = document.getElementById("add-task")
+  addTaskBtn.onclick = () => {
+    newTaskForm.classList.add('show');
+  }
 
   return { renderProjectList, renderTaskList }
 }
