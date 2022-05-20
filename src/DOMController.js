@@ -181,9 +181,15 @@ const RenderController = () => {
     return;
   } 
 
-  const addTaskBtn = document.getElementById("add-task")
+  const addTaskBtn = document.getElementById("add-task");
   addTaskBtn.onclick = () => {
     newTaskForm.classList.add('show');
+  }
+
+  const editProjectBtn = document.getElementById("edit-project");
+  const dropdownMenu = document.querySelector(".dropdown-menu");
+  editProjectBtn.onclick = () => {
+    dropdownMenu.classList.toggle("show-dropdown");
   }
 
   return { renderProjectList, renderTaskList }

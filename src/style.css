@@ -77,20 +77,74 @@ form button {
   bottom: 0%;
   width: 100vw;
   background-color: #fff;
-  max-height: 20vh;
+  max-height: 15vh;
+
+  padding: 10px 0;
 
   border-top: 1px solid black;
-  display: flex;
-  justify-content: center;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .project-menu button {
-  padding: 20px;
-  font-size: 18px;
+  font-size: 2.5rem;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-menu #add-task {
+  grid-column: 2 / 3;
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  font-size: 3.5rem;
+  padding: 0;
+  margin: auto;
 }
 
 .task-list {
   width: 80vw;
   overflow: auto;
+}
+
+#edit-project {
+  grid-column: 3 / 3;
+  height: 50px;
+  width: 50px;
+  margin-left: auto;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(-100% - 4rem);
+  right: 2.5rem;
+  border: 1px solid black;
+  background-color: #fff;
+  padding: .75rem;
+  border-radius: 15px;
+
+  pointer-events: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  opacity: 0;
+}
+
+.dropdown-menu button {
+  font-size: 1.2rem;
+}
+
+.dropdown-menu.show-dropdown {
+  opacity: 1;
+  pointer-events: auto;
 }

@@ -13,10 +13,15 @@
   </div>
 
   <div class="project-menu">
-    <button id="add-project">Add new project</button>
-    <button id="change-project-name">Change current project's name</button>
-    <button id="delete-project">Delete project</button>
-    <button id="add-task">Add task</button>
+    <button id="add-task">+</button>
+    <div class="dropdown">
+      <button id="edit-project">⋮</button>
+      <div class="dropdown-menu">
+        <button id="add-project">Add new project</button>
+        <button id="change-project-name">Change current project's name</button>
+        <button id="delete-project">Delete project</button>
+      </div>
+    </div>
   </div>
 
   <form id="new-task">
