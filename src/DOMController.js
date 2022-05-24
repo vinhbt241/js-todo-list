@@ -29,46 +29,67 @@ const RenderController = () => {
     taskList.setAttribute("projectid", project.ID);
     taskList.classList.add("task-list");
 
+    const completedTasks = document.createElement('div');
+    completedTasks.classList.add("completed-tasks-container");
+    completedTasks.innerHTML = ("<h1>Completed Tasks</h1>");
+
     project.tasks.forEach(task => {
       const taskItem = document.createElement('div');
       taskItem.id = task.ID;
+      taskItem.classList.add("task");
 
       const taskName = document.createElement('h3');
       taskName.innerText = task.name;
       taskItem.appendChild(taskName);
 
-      const taskInfo = document.createElement('p');
-      taskInfo.innerText = task.info;
-      taskItem.appendChild(taskInfo);
-
-      const taskDueDate = document.createElement('p');
-      taskDueDate.innerText = format(task.dueDate, 'yyyy-MM-dd');
-      taskItem.appendChild(taskDueDate);
-      
-      
+      const wrapper1 = document.createElement("div");
+      wrapper1.classList.add("task-content");
 
       const completeBtn = document.createElement('button');
+      completeBtn.classList.add("complete-task-btn");
+      
       if(task.isComplete) {
-        completeBtn.innerText = "O";
+        completeBtn.innerText = "✔";
+        completeBtn.classList.add("task-complete");
       } else {
-        completeBtn.innerText = "X";
+        completeBtn.innerText = " ";
+        completeBtn.classList.remove("task-complete");
       }
       completeBtn.onclick = () => {
         task.isComplete = !task.isComplete;
         taskList.parentNode.replaceChild(renderTaskList(project), taskList);
       }
-      taskItem.appendChild(completeBtn);
+      wrapper1.appendChild(completeBtn);
+      
+      const wrapper2 = document.createElement("div");
+
+      const taskInfo = document.createElement('p');
+      taskInfo.innerText = task.info;
+      wrapper2.appendChild(taskInfo);
+
+      const taskDueDate = document.createElement('p');
+      taskDueDate.innerText = "Due date: " + format(task.dueDate, 'yyyy-MM-dd');
+      wrapper2.appendChild(taskDueDate);
+      
+      wrapper1.appendChild(wrapper2);
+
+      const wrapper3 = document.createElement("div");
+      wrapper3.classList.add("task-setting-container");
 
       const editBtn = document.createElement('button');
-      editBtn.innerText = "Edit";
+      editBtn.innerText = "⚙︎";
       editBtn.onclick = () => {
         const editTaskForm = document.getElementById("edit-task");
+        editTaskForm.classList.add("show");
+
         editTaskForm['edit-task-name'].value = task.name;
         editTaskForm['edit-task-info'].value = task.info;
         editTaskForm['edit-task-due-date'].value = format(task.dueDate, 'yyyy-MM-dd');
         editTaskForm['edit-task-id'].value = task.ID;
         editTaskForm.addEventListener('submit',e => {
           e.preventDefault();
+          editTaskForm.classList.remove("show");
+
           let name = editTaskForm['edit-task-name'].value;
           let info = editTaskForm['edit-task-info'].value;
           let dueDate = Date.parse(editTaskForm['edit-task-due-date'].value);
@@ -89,18 +110,26 @@ const RenderController = () => {
         })
         return;
       }
-      taskItem.appendChild(editBtn);
+      wrapper3.appendChild(editBtn);
       
       const deleteBtn = document.createElement('button');
-      deleteBtn.innerText = "Delete";
+      deleteBtn.innerText = "🗑";
       deleteBtn.onclick = () => {
         project.removeTask(task.ID);
         taskList.parentNode.replaceChild(renderTaskList(project), taskList);
       }
-      taskItem.appendChild(deleteBtn);
-  
-      taskList.appendChild(taskItem);
+      wrapper3.appendChild(deleteBtn);
+      wrapper1.appendChild(wrapper3);
+      taskItem.appendChild(wrapper1);
+
+      if(task.isComplete) {
+        completedTasks.appendChild(taskItem);
+      } else {
+        taskList.appendChild(taskItem);
+      }
     })
+
+    taskList.appendChild(completedTasks);
 
     return taskList
   }
@@ -108,7 +137,7 @@ const RenderController = () => {
   const newTaskForm = document.getElementById("new-task");
   newTaskForm.addEventListener('submit', e => {
     e.preventDefault();
-    newTaskForm.classList.remove("show")
+    newTaskForm.classList.remove("show");
     // Create new task
     let name = newTaskForm['new-task-name'].value;
     let info = newTaskForm['new-task-info'].value;

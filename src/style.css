@@ -148,3 +148,58 @@ form button {
   opacity: 1;
   pointer-events: auto;
 }
+
+.task {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+}
+
+.complete-task-btn {
+  min-height: 30px;
+  min-width: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 32px;
+  color: #008ae6;
+  
+  border-radius: 50%;
+  border: 2px solid grey;
+
+  margin-right: 1.5rem;
+}
+
+.task-complete {
+  border: none;
+}
+
+.task-setting-container {
+  margin-left: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+
+  margin-right: 2rem;
+}
+
+.task-setting-container button {
+  font-size: 32px;
+  border: none;
+}
+
+.task-setting-container button:hover {
+  background-color: #fff;
+  color: #008ae6;
+}
+
+.completed-tasks-container {
+  margin-top: 2rem;
+}
