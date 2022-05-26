@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { Task } from "./task";
 import { App } from "./app";
 import { Project } from "./project";
+import { storeApp } from "./utils";
 
 const RenderController = () => {
 
@@ -58,6 +59,7 @@ const RenderController = () => {
       completeBtn.onclick = () => {
         task.isComplete = !task.isComplete;
         taskList.parentNode.replaceChild(renderTaskList(project), taskList);
+        storeApp();
       }
       wrapper1.appendChild(completeBtn);
       
@@ -106,6 +108,8 @@ const RenderController = () => {
               return;
             }
           })
+
+          storeApp();
           return;
         })
         return;
@@ -117,7 +121,10 @@ const RenderController = () => {
       deleteBtn.onclick = () => {
         project.removeTask(task.ID);
         taskList.parentNode.replaceChild(renderTaskList(project), taskList);
+        
+        storeApp();
       }
+
       wrapper3.appendChild(deleteBtn);
       wrapper1.appendChild(wrapper3);
       taskItem.appendChild(wrapper1);
@@ -131,7 +138,7 @@ const RenderController = () => {
 
     taskList.appendChild(completedTasks);
 
-    return taskList
+    return taskList;
   }
 
   const newTaskForm = document.getElementById("new-task");
@@ -157,6 +164,8 @@ const RenderController = () => {
         return;
       }
     })
+
+    storeApp()
     return;
   })
 
@@ -170,6 +179,8 @@ const RenderController = () => {
     App.addProject(newProject);
     const projectList = document.querySelector(".project-list");
     projectList.parentNode.replaceChild(renderProjectList(App.projects), projectList);
+
+    storeApp();
     return;
   })
 
@@ -191,7 +202,7 @@ const RenderController = () => {
       return project.ID == displayProjectID;
     })
 
-    editProjectForm['edit-project-name'].value = currentProject.name;
+    editProjectForm["edit-project-name"].value = currentProject.name;
 
     editProjectForm.classList.add("show");
 
@@ -204,18 +215,22 @@ const RenderController = () => {
 
       const projectList = document.querySelector(".project-list");
       projectList.parentNode.replaceChild(renderProjectList(App.projects), projectList);
+
+      storeApp();
       return;
     })
 
     return;
   } 
 
+  // Add some CSS to allow toggle form when add new task and edit projects
+
   const addTaskBtn = document.getElementById("add-task");
   addTaskBtn.onclick = () => {
     newTaskForm.classList.add('show');
   }
 
-  const editProjectBtn = document.getElementById("edit-project");
+  const editProjectBtn = document.getElementById("project-setting");
   const dropdownMenu = document.querySelector(".dropdown-menu");
   editProjectBtn.onclick = () => {
     dropdownMenu.classList.toggle("show-dropdown");

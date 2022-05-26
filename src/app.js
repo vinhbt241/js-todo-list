@@ -1,8 +1,12 @@
+import { storeApp, loadProjects } from "./utils";
+
+
 const App = (() => {
-  const projects = [];
+  const projects = loadProjects();
 
   const addProject = function(project) {
     this.projects.push(project);
+    storeApp();
     return;
   }
 
@@ -10,13 +14,16 @@ const App = (() => {
     this.projects.forEach((project, index) => {
       if(project.ID == projectID) {
         this.projects[index].name = newName;
+        storeApp();
         return;
       }
     })
   }
 
   const removeProject = function(projectID) {
-   this.projects = this.projects.filter(project => { project.ID != projectID })
+   this.projects = this.projects.filter(project => { project.ID != projectID });
+   storeApp();
+   return;
   }
 
   return { projects, addProject, editProject, removeProject }

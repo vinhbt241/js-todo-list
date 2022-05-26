@@ -111,7 +111,7 @@ form button {
   overflow: auto;
 }
 
-#edit-project {
+#project-setting {
   grid-column: 3 / 3;
   height: 50px;
   width: 50px;
