@@ -24,7 +24,11 @@ if(localStorage.getItem("projects") == null) {
 
 
 contentContainer.appendChild(DOMController.renderProjectList(App.projects));
-contentContainer.appendChild(DOMController.renderTaskList(App.projects[0]));
+
+if(App.projects.length > 0) {
+  contentContainer.appendChild(DOMController.renderTaskList(App.projects[0]));
+} 
+
 
 
 

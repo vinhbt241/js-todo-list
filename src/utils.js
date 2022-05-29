@@ -32,7 +32,6 @@ const loadProjects = () => {
       projects.push(project);
     });
   }
-  
 
   return projects;
 }

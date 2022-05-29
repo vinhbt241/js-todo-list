@@ -21,9 +21,8 @@ const App = (() => {
   }
 
   const removeProject = function(projectID) {
-   this.projects = this.projects.filter(project => { project.ID != projectID });
-   storeApp();
-   return;
+    this.projects = this.projects.filter(project => { return project.ID != projectID })
+    return;
   }
 
   return { projects, addProject, editProject, removeProject }

@@ -177,8 +177,7 @@ const RenderController = () => {
     const newProject = Project(name);
 
     App.addProject(newProject);
-    const projectList = document.querySelector(".project-list");
-    projectList.parentNode.replaceChild(renderProjectList(App.projects), projectList);
+    location.reload();
 
     storeApp();
     return;
@@ -223,6 +222,15 @@ const RenderController = () => {
     return;
   } 
 
+  const deleteProjectBtn = document.getElementById("delete-project");
+  deleteProjectBtn.onclick = () => {
+    const taskList = document.querySelector(".task-list");
+    let displayProjectID = taskList.getAttribute('projectid');
+    App.removeProject(displayProjectID);
+    storeApp();
+    location.reload();
+  }
+
   // Add some CSS to allow toggle form when add new task and edit projects
 
   const addTaskBtn = document.getElementById("add-task");
@@ -230,9 +238,9 @@ const RenderController = () => {
     newTaskForm.classList.add('show');
   }
 
-  const editProjectBtn = document.getElementById("project-setting");
+  const projectSettingBtn = document.getElementById("project-setting");
   const dropdownMenu = document.querySelector(".dropdown-menu");
-  editProjectBtn.onclick = () => {
+  projectSettingBtn.onclick = () => {
     dropdownMenu.classList.toggle("show-dropdown");
   }
 
